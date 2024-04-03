@@ -1,80 +1,22 @@
+"use client"
+
 import { PlusIcon } from "@heroicons/react/20/solid"
-
-const tags = [
-  {
-    groupAndElement: "0002,0010",
-    tagDescription: "TransferSyntaxUID",
-    valueRepresentation: "UI",
-    tagLength: "22",
-    tagMultiplicity: "1",
-    value: "1.2.840.10008.1.2.4.70",
-    group: 2,
-    element: 16,
-    editable: false
-  },
-  {
-    groupAndElement: "0001,0008",
-    tagDescription: "TransferSyntaxUID",
-    valueRepresentation: "UI",
-    tagLength: "22",
-    tagMultiplicity: "1",
-    value: "1.2.840.10008.1.2.4.70",
-    group: 1,
-    element: 8,
-    editable: false
-  },
-  {
-    groupAndElement: "0016,0002",
-    tagDescription: "TransferSyntaxUID",
-    valueRepresentation: "UI",
-    tagLength: "22",
-    tagMultiplicity: "1",
-    value: "1.2.840.10008.1.2.4.70",
-    group: 16,
-    element: 2,
-    editable: false
-  },
-  {
-    groupAndElement: "0016,0002",
-    tagDescription: "TransferSyntaxUID",
-    valueRepresentation: "UI",
-    tagLength: "22",
-    tagMultiplicity: "1",
-    value: "1.2.840.10008.1.2.4.70",
-    group: 16,
-    element: 2,
-    editable: false
-  },
-]
-
-
-const plans = [
-  {
-    id: 1,
-    name: 'Hobby',
-    memory: '4 GB RAM',
-    cpu: '4 CPUs',
-    storage: '128 GB SSD disk',
-    price: '$40',
-    isCurrent: false,
-  },
-  {
-    id: 2,
-    name: 'Startup',
-    memory: '8 GB RAM',
-    cpu: '6 CPUs',
-    storage: '256 GB SSD disk',
-    price: '$80',
-    isCurrent: false,
-  },
-  // More plans...
-]
+import { useEffect, useState } from "react"
+import { Tag } from "@/types"
+import { getTags } from "@/app/TagService"
 
 function classNames(...classes: (string | boolean | null | undefined)[]) {
   return classes.filter(Boolean).join(' ')
 }
 
 export default function Table() {
+
+  const [tags, setTags] = useState<Tag[]>([])
+
+  useEffect(() => {
+    getTags().then((tags) => setTags(tags))    
+  }, [])
+
   return (
     <div className="px-4 sm:px-6 lg:px-8">
       <div className="sm:flex sm:items-center">
