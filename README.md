@@ -9,7 +9,7 @@ A simple CRUD front-end web application created for challenge #2 of Thrive Pet H
 - TailwindCSS
 - Axios
 
-## Instructions
+## Setup
 
 1. Clone the repository
 2. Open the project in your IDE
