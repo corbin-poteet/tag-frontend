@@ -4,6 +4,7 @@ import { PlusIcon } from "@heroicons/react/20/solid"
 import { useEffect, useState } from "react"
 import { Tag } from "@/types"
 import { getTags, deleteTag } from "@/app/TagService"
+import axios from "axios"
 
 function classNames(...classes: (string | boolean | null | undefined)[]) {
   return classes.filter(Boolean).join(' ')
@@ -12,19 +13,38 @@ function classNames(...classes: (string | boolean | null | undefined)[]) {
 export default function Table() {
 
   const [tags, setTags] = useState<Tag[]>([])
+  const [loading, setLoading] = useState<boolean>(true)
+  const [deleting, setDeleting] = useState<boolean>(false) // for the offchance that the user clicks delete as the auto update is happening
+  const autoUpdateInterval = 1000
 
   const deleteTagAtIdx = async (tagIdx: number) => {
     const tag = tags[tagIdx]
     const group = tag.group
     const element = tag.element
+    setDeleting(true)
     deleteTag(group, element).then(() => {
       const newTags = tags.filter((t, idx) => idx !== tagIdx)
       setTags(newTags)
+      setDeleting(false)
     })
-  }
+  } 
 
   useEffect(() => {
-    getTags().then((tags) => setTags(tags))    
+    setLoading(true)
+    getTags().then((tags) => {
+      setTags(tags)
+      setLoading(false)
+    })
+  }, [])
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      if (deleting) return
+      getTags().then((tags) => {
+        setTags(tags)
+      })
+    }, autoUpdateInterval)
+    return () => clearInterval(interval)
   }, [])
 
   return (
@@ -32,21 +52,9 @@ export default function Table() {
       <div className="sm:flex sm:items-center">
         <div className="sm:flex-auto">
           <h1 className="text-base font-semibold leading-6 text-gray-900">Tags</h1>
-          <p className="mt-2 text-sm text-gray-700">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-          </p>
-        </div>
-        <div className="mt-4 sm:ml-16 sm:mt-0 sm:flex-none">
-          <button
-            type="button"
-            className="inline-flex items-center rounded-md bg-blue-primary px-2.5 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-blue-primary-dark focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2"
-          >
-            <PlusIcon className="-ml-0.5 h-5 w-5" aria-hidden="true" />
-            <span className="ml-1">Create tag</span>
-          </button>
         </div>
       </div>
-      <div className="mt-10 ring-1 ring-gray-300 shadow-sm ring-inset mx-0 bg-gray-200 rounded-lg">
+      <div className="mt-5 ring-1 ring-gray-300 shadow-sm ring-inset mx-0 bg-gray-200 rounded-lg">
         <table className="min-w-full divide-y divide-gray-200  table-auto">
           <thead className="text-gray-700 font-light">
             <tr>
@@ -207,6 +215,16 @@ export default function Table() {
             ))}
           </tbody>
         </table>
+        {loading && (
+          <div className="p-4 text-center text-gray-500">
+            Loading tags...
+          </div>
+        )}
+        {!loading && tags.length === 0 && (
+          <div className="p-4 text-center text-gray-500">
+            No tags found.
+          </div>
+        )}
       </div>
     </div>
   )
