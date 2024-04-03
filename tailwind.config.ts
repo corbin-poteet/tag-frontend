@@ -8,11 +8,17 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      colors: {
+        "thrive-blue": "#00A5E6",
+        "thrive-green": "#9BD606",
+        "blue-primary": "#2D759F",
+        "blue-secondary": "#E8F8FF",
+      },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
         "gradient-conic":
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
-      },
+      }
     },
   },
   plugins: [],
