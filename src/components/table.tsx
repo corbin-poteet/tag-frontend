@@ -31,6 +31,7 @@ export default function Table() {
     })
   }
 
+  // Fetch tags on initial load
   useEffect(() => {
     setLoading(true)
     getTags().then((tags) => {
@@ -39,6 +40,7 @@ export default function Table() {
     })
   }, [])
 
+  // Auto update tags
   useEffect(() => {
     if (autoUpdate) {
       const interval = setInterval(() => {
