@@ -3,8 +3,9 @@
 import { PlusIcon } from "@heroicons/react/20/solid"
 import { useEffect, useState } from "react"
 import { Tag } from "@/types"
-import { getTags, deleteTag } from "@/app/TagService"
+import { getTags, deleteTag } from "@/app/service"
 import axios from "axios"
+import { Switch } from "@headlessui/react"
 
 function classNames(...classes: (string | boolean | null | undefined)[]) {
   return classes.filter(Boolean).join(' ')
@@ -15,6 +16,7 @@ export default function Table() {
   const [tags, setTags] = useState<Tag[]>([])
   const [loading, setLoading] = useState<boolean>(true)
   const [deleting, setDeleting] = useState<boolean>(false) // for the offchance that the user clicks delete as the auto update is happening
+  const [autoUpdate, setAutoUpdate] = useState<boolean>(true)
   const autoUpdateInterval = 1000
 
   const deleteTagAtIdx = async (tagIdx: number) => {
@@ -27,7 +29,7 @@ export default function Table() {
       setTags(newTags)
       setDeleting(false)
     })
-  } 
+  }
 
   useEffect(() => {
     setLoading(true)
@@ -38,20 +40,46 @@ export default function Table() {
   }, [])
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      if (deleting) return
-      getTags().then((tags) => {
-        setTags(tags)
-      })
-    }, autoUpdateInterval)
-    return () => clearInterval(interval)
-  }, [])
+    if (autoUpdate) {
+      const interval = setInterval(() => {
+        if (!deleting) {
+          getTags().then((tags) => {
+            setTags(tags)
+          })
+        }
+      }, autoUpdateInterval)
+      return () => clearInterval(interval)
+    }
+  }, [autoUpdate, deleting])
 
   return (
     <div className="px-4 sm:px-6 lg:px-8">
       <div className="sm:flex sm:items-center">
         <div className="sm:flex-auto">
           <h1 className="text-base font-semibold leading-6 text-gray-900">Tags</h1>
+        </div>
+        <div className="mt-5 sm:mt-0 sm:ml-4">
+          <Switch.Group as="div" className="flex items-center">
+            <Switch.Label as="span" className="mr-2 text-sm">
+              <span className="font-medium text-gray-900">Automatic Updates</span>
+            </Switch.Label>
+            <Switch
+              checked={autoUpdate}
+              onChange={setAutoUpdate}
+              className={classNames(
+                autoUpdate ? 'bg-blue-primary' : 'bg-gray-200',
+                'relative inline-flex h-6 w-11 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-blue-primary focus:ring-offset-2'
+              )}
+            >
+              <span
+                aria-hidden="true"
+                className={classNames(
+                  autoUpdate ? 'translate-x-5' : 'translate-x-0',
+                  'pointer-events-none inline-block h-5 w-5 transform rounded-full bg-white shadow ring-0 transition duration-200 ease-in-out'
+                )}
+              />
+            </Switch>
+          </Switch.Group>
         </div>
       </div>
       <div className="mt-5 ring-1 ring-gray-300 shadow-sm ring-inset mx-0 bg-gray-200 rounded-lg">
