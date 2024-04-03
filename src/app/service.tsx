@@ -1,9 +1,7 @@
 import axios from "axios";
 import { Tag } from "@/types";
 
-const REST_API_BASE_URL = "http://localhost:8080/tag"; // @TODO: changed to /api/tags
-
-
+const REST_API_BASE_URL = "http://localhost:8080/api/v1/tags"; // @TODO: changed to /api/tags
 
 export const getTags = async () => {
   const response = await axios.get(REST_API_BASE_URL);
