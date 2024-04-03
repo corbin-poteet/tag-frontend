@@ -95,9 +95,9 @@ export default function Table() {
           </button>
         </div>
       </div>
-      <div className="mt-10 ring-1 ring-gray-300 shadow-sm ring-inset mx-0 bg-blue-primary rounded-lg">
-        <table className="min-w-full divide-y divide-gray-300  table-auto">
-          <thead className="text-gray-100 font-light">
+      <div className="mt-10 ring-1 ring-gray-300 shadow-sm ring-inset mx-0 bg-gray-200 rounded-lg">
+        <table className="min-w-full divide-y divide-gray-200  table-auto">
+          <thead className="text-gray-700 font-light">
             <tr>
               <th scope="col" className="py-3.5 pl-4 pr-3 text-left text-sm  sm:pl-6">
                 Group and Element
@@ -126,13 +126,13 @@ export default function Table() {
               <th scope="col" className="px-3 py-3.5 text-left text-sm">
                 Value
               </th>
-              <th scope="col" className="px-3 py-3.5 text-left text-sm">
+              <th scope="col" className="px-3 py-3.5 text-center text-sm">
                 Group
               </th>
-              <th scope="col" className="px-3 py-3.5 text-left text-sm">
+              <th scope="col" className="px-3 py-3.5 text-center text-sm">
                 Element
               </th>
-              <th scope="col" className="px-3 py-3.5 text-left text-sm">
+              <th scope="col" className="px-3 py-3.5 text-center text-sm">
                 Editable
               </th>
               <th scope="col" className="relative py-3.5 pl-3 pr-4 sm:pr-6">
@@ -179,7 +179,7 @@ export default function Table() {
                 <td
                   className={classNames(
                     tagIdx === 0 ? '' : 'border-t border-gray-200',
-                    'hidden px-3 py-3.5 text-sm text-gray-500 lg:table-cell'
+                    'hidden px-3 py-3.5 text-sm  text-gray-500 lg:table-cell'
                   )}
                 >
                   {tag.tagLength}
@@ -209,8 +209,8 @@ export default function Table() {
                 <td
                   className={classNames(
                     tagIdx === 0 ? '' : 'border-t border-gray-200',
-                    'hidden px-3 py-3.5 text-sm text-gray-500 lg:table-cell'
-                  ) + ""}
+                    'hidden px-3 py-3.5 text-center text-sm text-gray-500 lg:table-cell'
+                  )}
                 >
                   {tag.group}
                 </td>
@@ -219,7 +219,7 @@ export default function Table() {
                 <td
                   className={classNames(
                     tagIdx === 0 ? '' : 'border-t border-gray-200',
-                    'hidden px-3 py-3.5 text-sm text-gray-500 lg:table-cell'
+                    'hidden px-3 py-3.5 text-center text-sm text-gray-500 lg:table-cell'
                   )}
                 >
                   {tag.element}
@@ -229,7 +229,7 @@ export default function Table() {
                 <td
                   className={classNames(
                     tagIdx === 0 ? '' : 'border-t border-gray-200',
-                    'hidden px-3 py-3.5 text-sm text-gray-500 lg:table-cell'
+                    'hidden px-3 py-3.5 text-sm text-center text-gray-500 lg:table-cell'
                   )}
                 >
                   {tag.editable ? 'Yes' : 'No'}
@@ -239,7 +239,7 @@ export default function Table() {
                 <td
                   className={classNames(
                     tagIdx === 0 ? '' : 'border-t border-gray-200',
-                    'relative py-3.5 pl-3 pr-4 text-right text-sm font-medium sm:pr-6'
+                    'relative py-3.5 pl-3 pr-4 text-sm font-medium sm:pr-6'
                   )}
                 >
                   <button
