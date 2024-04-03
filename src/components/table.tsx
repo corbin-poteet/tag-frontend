@@ -3,7 +3,7 @@
 import { PlusIcon } from "@heroicons/react/20/solid"
 import { useEffect, useState } from "react"
 import { Tag } from "@/types"
-import { getTags } from "@/app/TagService"
+import { getTags, deleteTag } from "@/app/TagService"
 
 function classNames(...classes: (string | boolean | null | undefined)[]) {
   return classes.filter(Boolean).join(' ')
@@ -12,6 +12,16 @@ function classNames(...classes: (string | boolean | null | undefined)[]) {
 export default function Table() {
 
   const [tags, setTags] = useState<Tag[]>([])
+
+  const deleteTagAtIdx = async (tagIdx: number) => {
+    const tag = tags[tagIdx]
+    const group = tag.group
+    const element = tag.element
+    deleteTag(group, element).then(() => {
+      const newTags = tags.filter((t, idx) => idx !== tagIdx)
+      setTags(newTags)
+    })
+  }
 
   useEffect(() => {
     getTags().then((tags) => setTags(tags))    
@@ -186,6 +196,9 @@ export default function Table() {
                   <button
                     type="button"
                     className="inline-flex items-center rounded-md bg-red-primary px-2.5 py-1.5 text-sm text-light text-white shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-red-primary-dark focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-primary-dark focus-visible:ring focus-visible:ring-red-primary-dark focus-visible:ring-offset-2 focus-visible:ring-offset-red-primary-dark"
+                    onClick={() => {
+                      deleteTagAtIdx(tagIdx)
+                    }}
                   >
                     Delete
                   </button>

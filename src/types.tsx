@@ -5,8 +5,8 @@ type Tag = {
   tagLength: string;
   tagMultiplicity: string;
   value: string;
-  group: string;
-  element: string;
+  group: number;
+  element: number;
   editable: boolean;
 };
 

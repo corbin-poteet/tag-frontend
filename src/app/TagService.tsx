@@ -24,3 +24,8 @@ export const updateTag = async (tag: Tag) => {
   const response = await axios.put(REST_API_BASE_URL, tag);
   return response.data;
 }
+
+export const deleteTag = async (group: number, element: number) => {
+  const response = await axios.delete(`${REST_API_BASE_URL}/${group}/${element}`);
+  return response.data;
+}
