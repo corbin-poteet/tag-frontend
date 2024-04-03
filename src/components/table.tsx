@@ -81,8 +81,7 @@ export default function Table() {
         <div className="sm:flex-auto">
           <h1 className="text-base font-semibold leading-6 text-gray-900">Tags</h1>
           <p className="mt-2 text-sm text-gray-700">
-            Your team is on the <strong className="font-semibold text-gray-900">Startup</strong> plan. The next payment
-            of $80 will be due on August 4, 2022.
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
           </p>
         </div>
         <div className="mt-4 sm:ml-16 sm:mt-0 sm:flex-none">
