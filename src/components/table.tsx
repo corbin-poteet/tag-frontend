@@ -85,28 +85,28 @@ export default function Table() {
         </div>
       </div>
       <div className="mt-5 ring-1 ring-gray-300 shadow-sm ring-inset mx-0 bg-gray-200 rounded-lg">
-        <table className="min-w-full divide-y divide-gray-200  table-auto">
+        <table className="min-w-full divide-y divide-gray-200">
           <thead className="text-gray-700 font-light">
             <tr>
               <th scope="col" className="py-3.5 pl-4 pr-3 text-left text-sm  sm:pl-6">
                 Group and Element
               </th>
-              <th
-                scope="col"
-                className="px-3 py-3.5 text-left text-sm table-cell font-regular"
-              >
+              <th scope="col" className="px-3 py-3.5 text-left text-sm table-cell font-regular">
+                Study ID
+              </th>
+              <th scope="col" className="px-3 py-3.5 text-left text-sm table-cell font-regular">
+                Series ID
+              </th>
+              <th scope="col" className="px-3 py-3.5 text-left text-sm table-cell font-regular">
+                Instance ID
+              </th>
+              <th scope="col" className="px-3 py-3.5 text-left text-sm table-cell font-regular">
                 Tag Description
               </th>
-              <th
-                scope="col"
-                className="px-3 py-3.5 text-left text-sm table-cell"
-              >
+              <th scope="col" className="px-3 py-3.5 text-left text-sm table-cell">
                 Value Representation
               </th>
-              <th
-                scope="col"
-                className="px-3 py-3.5 text-left text-sm table-cell"
-              >
+              <th scope="col" className="px-3 py-3.5 text-left text-sm table-cell">
                 Tag Length
               </th>
               <th scope="col" className="px-3 py-3.5 text-left text-sm">
@@ -142,6 +142,36 @@ export default function Table() {
                   <div className="font-medium text-gray-900">
                     {tag.groupAndElement}
                   </div>
+                </td>
+
+                {/* Study ID */}
+                <td
+                  className={classNames(
+                    tagIdx === 0 ? '' : 'border-t border-gray-200',
+                    'hidden px-3 py-3.5 text-sm text-gray-500 lg:table-cell'
+                  )}
+                >
+                  {tag.studyId}
+                </td>
+
+                {/* Series ID */}
+                <td
+                  className={classNames(
+                    tagIdx === 0 ? '' : 'border-t border-gray-200',
+                    'hidden px-3 py-3.5 text-sm text-gray-500 lg:table-cell'
+                  )}
+                >
+                  {tag.seriesId}
+                </td>
+
+                {/* Instance ID */}
+                <td
+                  className={classNames(
+                    tagIdx === 0 ? '' : 'border-t border-gray-200',
+                    'hidden px-3 py-3.5 text-sm text-gray-500 lg:table-cell'
+                  )}
+                >
+                  {tag.instanceId}
                 </td>
 
                 {/* Tag Description */}
@@ -245,7 +275,7 @@ export default function Table() {
             ))}
           </tbody>
         </table>
-        {loading && (
+        {loading && tags.length === 0 && (
           <div className="p-4 text-center text-gray-500">
             Loading tags...
           </div>
