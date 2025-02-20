@@ -1,6 +1,6 @@
 # Tag CRUD System Backend
 
-A simple CRUD frontend web application.
+A simple CRUD frontend web application for the [tag-fullstack](https://github.com/corbin-poteet/tag-fullstack) web application.
 
 ### Tech stack:
 - React
