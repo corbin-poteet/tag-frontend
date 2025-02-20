@@ -1,6 +1,6 @@
 # Tag CRUD System Backend
 
-A simple CRUD front-end web application created for challenge #2 of Thrive Pet Healthcare's interview project. Matching the requirements of the challenge, the application allows users to read and delete tags, however, full CRUD functionality is implemented, but not exposed to the user (because UI is painful).
+A simple CRUD fullstack web application.
 
 ### Tech stack:
 - React
