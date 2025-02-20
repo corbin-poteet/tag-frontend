@@ -1,6 +1,6 @@
 # Tag CRUD System Backend
 
-A simple CRUD fullstack web application.
+A simple CRUD frontend web application.
 
 ### Tech stack:
 - React
